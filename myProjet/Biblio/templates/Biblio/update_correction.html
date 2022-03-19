@@ -1,0 +1,40 @@
+{% extends 'layouts/base.html'%}
+
+{% load static %}
+
+{% block title %} Modifier une épreuve {%endblock%}
+
+
+
+{%block content %}
+{% load crispy_forms_tags %}
+<div class="container mt-5">
+    <div class="row"></div>
+</div>
+<div class="container rounded-5 w-50 bg-gray-100 shadow-xl rounded mt-5">
+    <div class="row">
+        <div class="col p-5 pb-0">
+            <h1 class="fs-2 fw-bold text-center">Modifier la correction</h1>
+        </div>
+    </div>
+    <div class="row px-5 py-0">
+        <div class="col mt-5">
+            <form method="post" action="" class="form-container" novalidate enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | crispy }}
+                <div class="row py-5">
+                    <!-- <div class="col-4"> -->
+                        <input type="submit" class="col-4 bg-green-600 hover:bg-green-700 text-white rounded-3 btn" value="Modifier"/>
+                        <input type="reset" class="col bg-red-600 hover:bg-red-700 text-white rounded-3 btn mx-5" value="Annuler"/>
+                        <!-- <input type="submit" class="btn btn-success" value="Modifier"/> -->
+                    <!-- </div> -->
+                    <!-- <div class="col">
+                        <input type="reset" class="btn btn-danger" value="Annuler" />
+                    </div> -->
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

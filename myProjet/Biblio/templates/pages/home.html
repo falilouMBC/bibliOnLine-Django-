@@ -1,0 +1,65 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} HomePage {% endblock %}
+
+
+{% block content %}
+
+<div class="container pt-4">
+    <div class="row bg-gray-100 my-5">
+        <div class="col py-5 text-center text-zinc-900 text-3xl">
+            <h1 class="text-slate-900">
+                Bienvenue sur <strong><i class="fa-solid fa-book"></i> eLibrary</strong> le meilleur moyen de préparer vos épreuves
+            </h1>
+        </div>
+    </div>
+
+    <div class="container mt-5 mb-5">
+        <div class="row row-cols-3 row-cols-lg-4">
+            {% for epreuve in epreuves %}
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
+                <div class="card shadow-xl mt-3 rounded">
+                    <div class="align-items-center p-2 text-center">
+                        {% if epreuve.matiere == "Java" %}
+                        <img src="{% static 'images/java.png' %}" alt="" class="card-img-top rounded" width="160">
+                        {% elif epreuve.matiere == "Java EE" %}
+                            <img src="{% static 'images/jee.png' %}" alt="" class="card-img-top rounded" width="160">
+                        {%elif epreuve.matiere == "Django" %}
+                            <img src="{% static 'images/django.png' %}" alt="" class="card-img-top rounded" width="160">
+                        {%elif epreuve.matiere == "Test et Logiciels" %}
+                            <img src="{% static 'images/test_logiciel.png' %}" alt="" class="card-img-top rounded" width="160">
+                        {%elif epreuve.matiere == "Php" %}
+                            <img src="{% static 'images/php.png' %}" alt="" class="card-img-top rounded" width="160">
+                        {%elif epreuve.matiere == "Angular" %}
+                            <img src="{% static 'images/angular.png' %}" alt="" class="card-img-top rounded" width="160">
+                        {%else%}
+                        <img src="{% static 'images/computer.png' %}" alt="" class="card-img-top rounded" width="160">
+                        {% endif %}                    <div class="card-body mt-3 info">
+                            <h5 class="card-title"><strong> Titre: </strong><strong>{{ epreuve.intitulet }}</strong></h5>
+                            <p class="text-start"><strong> Matiere: </strong>
+                                {{ epreuve.matiere | truncatechars:"10" }}</p>
+                            <p class="text-start"><strong>Filiere:</strong> {{epreuve.filiere }} </p>
+                            <p class="text-start"> <strong><i class="fa-solid fa-chalkboard-user"></i></strong>
+                                {{ epreuve.professeur }}</p>
+                            <div class="row my-3">
+                                <a href="/read/{{ epreuve.file }}" class="btn-sm btn-outline-dark border-1 col-4 mr-3"><i class="fa-solid fas fa-eye "aria-hidden="true"></i> Voir</a>
+                                <a href="/download/{{ epreuve.file }}" class="btn-sm btn-dark col-5"><i class="fa-solid fa-download" aria-hidden="true"></i> Télécharger</a>
+                            </div>
+                        {% for correction in corrections %}
+                        {%if correction.id_epreuve_id == epreuve.id %}
+                        <div class="row my-3">
+                        <a name="" id="" class="btn-sm btn-outline-dark border-1" href="{% url 'corrections' epreuve.id %}" role="button">Afficher les Corrections</a>
+                        </div>  
+                        {% endif %}
+                        {%endfor %}
+                         </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

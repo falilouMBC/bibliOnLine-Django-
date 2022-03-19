@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+
+{% load static %}
+
+{% block title %} Details de  {% endblock %}
+
+{%block content %}    
+    <div class="container p-5 mt-5 mb-5 text-center">
+        <div class="row">
+        <div class="col-10 col-lg-6">
+                <div class="card mt-3 rounded">
+                    <div class="align-items-center p-2 text-center">
+                        <img src="{% static 'images/dev.png' %}" alt="" class="card-img-top rounded" width="160">
+                        <div class="card-body mt-3 info">
+                            <h5 class="card-title text-3xl"><strong>{{ epreuve.id }}.{{ epreuve.intitulet }}</strong></h5>
+                            <p class="card-text text-3xl d-block"> <strong>Matiere :</strong> {{ epreuve.matiere }} </p>
+                            <p class="card-text text-3xl d-block"> Filiere : {{epreuve.filiere }} </p>
+                            <p class="card-text text-3xl d-block"> Professeur : {{ epreuve.professeur }} </p>
+                            <div class="col mt-3">
+                                <a href="{% url 'add_correction' epreuve.id %}" class="btn btn-info">Add an answer</a>
+                                <a href="{% url 'home' %}" class="btn btn-success">Download </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

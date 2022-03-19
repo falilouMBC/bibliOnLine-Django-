@@ -1,0 +1,44 @@
+{% extends 'layouts/base.html' %}
+
+{%block title%} New Epreuve {%endblock%}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row"></div>
+</div>
+<div class="container rounded-3 w-50 w-lg-25 shadow-xl mt-5">
+    <div class="row justify-content-center">
+        <div class="col px-5">
+            <h1 class="text-dark fw-bold fs-1 text-center py-5">Ajouter une correction</h1>
+            {% load crispy_forms_tags %}
+            <form method="post" action="" novalidate enctype="multipart/form-data">
+                {% if form.subject.errors %}
+                    {% for error in form.subject.errors %}
+                        <p class="text-danger"><strong>{{ error }}</strong></p>
+                    {% endfor %}
+                {% endif %}
+
+                {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% if field.help_text %}
+                            <p class="help"> {{ field.help_text }}</p>
+                        {% endif %}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <p class="text-danger"><strong>{{ error }}</strong></p>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <div class="form-group flex justify-content-center pt-3 pb-5">
+                    <button type="submit" class="bg-green-600 btn btn-success col-4 mr-10">AJOUTER</button>
+                    <button type="reset" class="bg-red-600 btn btn-danger col-4">ANNULER</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

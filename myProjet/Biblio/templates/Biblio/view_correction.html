@@ -1,0 +1,14 @@
+{% load static %}
+{% for correction in corrections %}
+        <div class="col-md-4">
+            <div class="card shadow-xl mt-3 rounded">
+                <div class="align-items-center p-2 text-center">
+                    <img src="{% static 'images/dev.png' %}" alt="" class="card-img-top rounded" width="160">
+                    <div class="card-body mt-3 info">
+                        <h5 class="card-title"><strong>{{ correction.id }}.{{ correction.intitulet }}</strong></h5>
+                 
+                    </div>
+                </div>
+            </div>
+        </div>
+{% endfor %}
